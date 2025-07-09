@@ -39,13 +39,13 @@ class View(ft.UserControl):
             alignment=ft.MainAxisAlignment.CENTER
         )
 
-
+        self._ddYear = ft.Dropdown(label = "Year")
         self._ddStore = ft.Dropdown(label="Store")
-        self._txtIntK = ft.TextField(label="Numero giorni massimo K")
+        self._txtIntK = ft.TextField(label="Numero vendite minime K")
+        self._txtYear = ft.TextField(label="Seleziona un anno tra 2016 e 2018")
         self._btnCreaGrafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo)
         cont = ft.Container(self._ddStore, width=250, alignment=ft.alignment.top_left)
-        row1 = ft.Row([cont, self._txtIntK, self._btnCreaGrafo], alignment=ft.MainAxisAlignment.CENTER,
-                      vertical_alignment=ft.CrossAxisAlignment.END)
+
 
         self._controller.fillDDStore()
 
@@ -53,7 +53,7 @@ class View(ft.UserControl):
                                            on_click=self._controller.handleCerca)
 
         self._ddNode = ft.Dropdown(label="Node")
-        cont2 = ft.Container(self._ddNode, width=250, alignment=ft.alignment.top_left)
+        cont2 = ft.Container(self._ddNode, width=450, alignment=ft.alignment.top_left)
 
 
         self._btnRicorsione = ft.ElevatedButton(text="Ricorsione",
@@ -62,6 +62,8 @@ class View(ft.UserControl):
 
         row1 = ft.Row([cont,
                        self._txtIntK,
+                       self._ddYear,
+                       #self._txtYear,
                        self._btnCreaGrafo,
                        ],
                       alignment=ft.MainAxisAlignment.CENTER,
@@ -79,8 +81,8 @@ class View(ft.UserControl):
                        row3,
                       )
 
-        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
-        self._page.controls.append(self.txt_result)
+        self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
+        self._page.controls.append(self._txt_result)
         self._page.update()
 
     def theme_changed(self, e: ft.ControlEvent):
