@@ -16,3 +16,9 @@ class Controller:
 
     def handleCerca(self, e):
         pass
+
+    def fillDDStore(self):
+        pass
+
+    def handleRicorsione(self, e):
+        pass
