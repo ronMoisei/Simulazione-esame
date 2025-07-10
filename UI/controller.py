@@ -8,8 +8,6 @@ class Controller:
         # the model, which implements the logic of the program and holds the data
         self._model = model
 
-    def handleDDYearSelection(self, e):
-        pass
 
     def fillDDStore(self):
         try:
@@ -79,11 +77,10 @@ class Controller:
             self._view._txt_result.controls.clear()
             if not self._view._ddNode.value:
                 raise ValueError("Devi selezionare un nodo di partenza.")
-            print(self._view._ddNode.value[0])
             nodes = self._model.getCammino(self._view._ddNode.value[0])
             self._view._txt_result.controls.append(ft.Text(f"Nodo di partenza: {self._view._ddNode.value}"))
             for n in nodes:
-                self._view._txt_result.controls.append(ft.Text(str(n)))
+                self._view._txt_result.controls.append(ft.Text(f"{str(n)} - {n.list_price}"))
             self._view.update_page()
 
         except Exception as ex:
@@ -111,7 +108,21 @@ class Controller:
 
 
     def handleRicorsione(self, e):
-        pass
+        try:
+            self._view._txt_result.controls.clear()
+            if not self._view._ddNode.value:
+                raise ValueError("Devi selezionare un nodo di partenza.")
+            bestpath, bestscore = self._model.getBestPath(self._view._ddNode.value)
+            self._view._txt_result.controls.append(
+                ft.Text(f"Trovato un cammino che parte da {self._view._ddNode.value} "
+                        f"con somma dei pesi uguale a {bestscore}.")
+            )
+            for v in bestpath:
+                self._view._txt_result.controls.append(ft.Text(f"{str(v)} - {v.list_price}"))
+            self._view.update_page()
+
+        except Exception as ex:
+            self._show_error(f"Errore calcolo ricorsione: {ex}")
 
     def _show_error(self, message: str):
         """Mostra un messaggio di errore in txt_result."""
