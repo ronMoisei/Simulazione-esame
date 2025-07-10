@@ -6,19 +6,23 @@ class Model:
         self._graph = nx.DiGraph()
         self._idMap = {}
 
+    def getStores(self):
+        return DAO.getAllStores()
 
     def get_nodes(self, store):
         return DAO.get_nodes(store)
 
     def get_edges(self, idMap, product):
-        return DAO.get_edges(product)
+        return DAO.get_edges(idMap, product)
+
+    def getProductsByStores(self, store_id):
+        return DAO.getProductsByStores(store_id)
 
     def buildGraph(self, store, product = None):
         self._graph.clear()
         self._nodes = self.get_nodes(store)
         for n in self._nodes:
             self._idMap[n.customer_id] = n
-
         self._graph.add_nodes_from(self._nodes)
 
         allEdges = self.get_edges(self._idMap, product)
@@ -30,5 +34,5 @@ class Model:
 
 if __name__ == '__main__':
     m = Model()
-    grafo = m.buildGraph(1)
-    print(grafo)
+    m.buildGraph(1)
+    print(m._idMap)

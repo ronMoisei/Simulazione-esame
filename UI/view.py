@@ -39,9 +39,9 @@ class View(ft.UserControl):
             alignment=ft.MainAxisAlignment.CENTER
         )
 
-        self._ddYear = ft.Dropdown(label = "Year")
+        self._ddProduct = ft.Dropdown(label ="Prodotto",
+                                      width= 650)
         self._ddStore = ft.Dropdown(label="Store")
-        self._txtIntK = ft.TextField(label="Numero vendite minime K")
         self._txtYear = ft.TextField(label="Seleziona un anno tra 2016 e 2018")
         self._btnCreaGrafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo)
         cont = ft.Container(self._ddStore, width=250, alignment=ft.alignment.top_left)
@@ -61,8 +61,7 @@ class View(ft.UserControl):
 
 
         row1 = ft.Row([cont,
-                       self._txtIntK,
-                       self._ddYear,
+                       self._ddProduct,
                        #self._txtYear,
                        self._btnCreaGrafo,
                        ],
