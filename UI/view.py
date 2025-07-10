@@ -39,13 +39,13 @@ class View(ft.UserControl):
             alignment=ft.MainAxisAlignment.CENTER
         )
 
-        self._ddYear = ft.Dropdown(label = "Year")
+
         self._ddStore = ft.Dropdown(label="Store")
-        self._txtIntK = ft.TextField(label="Numero vendite minime K")
-        self._txtYear = ft.TextField(label="Seleziona un anno tra 2016 e 2018")
+        self._txtIntK = ft.TextField(label="Numero giorni massimo K")
         self._btnCreaGrafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo)
         cont = ft.Container(self._ddStore, width=250, alignment=ft.alignment.top_left)
-
+        row1 = ft.Row([cont, self._txtIntK, self._btnCreaGrafo], alignment=ft.MainAxisAlignment.CENTER,
+                      vertical_alignment=ft.CrossAxisAlignment.END)
 
         self._controller.fillDDStore()
 
@@ -53,24 +53,21 @@ class View(ft.UserControl):
                                            on_click=self._controller.handleCerca)
 
         self._ddNode = ft.Dropdown(label="Node")
-        cont2 = ft.Container(self._ddNode, width=450, alignment=ft.alignment.top_left)
+        cont2 = ft.Container(self._ddNode, width=250, alignment=ft.alignment.top_left)
 
 
         self._btnRicorsione = ft.ElevatedButton(text="Ricorsione",
                                            on_click=self._controller.handleRicorsione)
 
-
         row1 = ft.Row([cont,
                        self._txtIntK,
-                       self._ddYear,
-                       #self._txtYear,
                        self._btnCreaGrafo,
                        ],
                       alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
         row2 = ft.Row([cont2,
                        ft.Container(self._btnCerca, width=250)
-        ], alignment=ft.MainAxisAlignment.CENTER)
+                       ], alignment=ft.MainAxisAlignment.CENTER)
 
         row3 = ft.Row([ft.Container(self._btnRicorsione, width=250)
                        ],
@@ -79,7 +76,7 @@ class View(ft.UserControl):
                        row1,
                        row2,
                        row3,
-                      )
+                       )
 
         self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
         self._page.controls.append(self._txt_result)
